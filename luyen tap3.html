@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button onclick="hienthi()">hien thi san pham</button>
+<button onclick="them()">them san pham</button>
+<div id="kq"></div>
+<script>
+    let a = [
+        {
+            name: 'xoai long an',
+            price: 61,
+        },
+        {
+            name: 'dua Nghe An',
+            price: 34,
+        },
+        {
+            name: 'tao Dong Thap',
+            price: 25,
+        },
+    ];
+    function hienthi() {
+        let dem = '<h1>DANH SACH SAN PHAM</h1>';
+         dem += `<h3>so luong san pham la: ${a.length}</h3>`
+        for (let i = 0; i < a.length; i++) {
+            dem += `<h3><hr>${a[i].name} <br>  ${a[i].price}k <button onclick="chinhsua(${i})">chinh sua</button> </h3>`
+            document.getElementById('kq').innerHTML = dem + '<hr>'
+        }
+    }
+    function them() {
+        let b = '<input id="sodautien" placeholder=" nhap ten san pham">'
+        let c = '<input type="number" id="sothuhai" placeholder="nhap gia ">'
+        let d = '<button onclick="add()">add</button>'
+        document.getElementById('kq').innerHTML = b + '<br>' + c + '<br>' + d
+    }
+    function add() {
+        let ten = document.getElementById('sodautien').value;
+        let gia = document.getElementById('sothuhai').value
+        if(ten && !isNaN(gia)){
+            a.push({name: ten , price: gia})
+            hienthi()
+        }
+    }
+    function chinhsua(index) {
+        let b = `<input id="sothutu" value="${a[index].name}">`;
+        let c = `<input type="number" id="sothunam" value="${a[index].price}">`;
+        let d = `<button onclick="luu(${index})">Lưu</button>`;
+        document.getElementById('kq').innerHTML = b + '<br>' + c + '<br>' + d;
+    }
+    function luu(index) {
+        let ten = document.getElementById('sothutu').value;
+        let gia = document.getElementById('sothunam').value;
+        if (ten && !isNaN(gia)) {
+            a[index].name = ten;
+            a[index].price = gia;
+            hienthi();
+        }
+    }
+</script>
+</body>
+</html>
